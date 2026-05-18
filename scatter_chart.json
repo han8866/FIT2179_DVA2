@@ -1,0 +1,76 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 650,
+  "height": 350,
+  "title": {
+    "text": "Victoria on the Move: Distance vs. Trip Duration",
+    "subtitle": "Click on the legend items to highlight specific trip purposes"
+  },
+  "data": {
+    "url": "trim_trips_vista_2012_2020_lga_v1.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "cumdist": "number",
+        "triptime": "number",
+        "starthour": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "legend_highlight",
+      "select": {"type": "point", "fields": ["trippurp"]},
+      "bind": "legend"
+    }
+  ],
+  "transform": [
+    {
+      "filter": "isValid(datum.cumdist) && isValid(datum.triptime)"
+    }
+  ],
+  "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 300
+  },
+  "encoding": {
+    "x": {
+      "field": "cumdist",
+      "type": "quantitative",
+      "title": "Travel Distance (km)",
+      "scale": {"zero": false}
+    },
+    "y": {
+      "field": "triptime",
+      "type": "quantitative",
+      "title": "Trip Duration (minutes)",
+      "scale": {"zero": false}
+    },
+    "color": {
+      "field": "trippurp",
+      "type": "nominal",
+      "title": "Trip Purpose",
+      "legend": {
+        "titleFontSize": 16,
+        "titlePadding": 10,
+        "labelFontSize": 20,
+        "symbolSize": 100,
+        "offset": 20
+      },
+      "scale": {
+        "scheme": "tableau20"
+      }
+    },
+    "opacity": {
+      "condition": {"param": "legend_highlight", "value": 0.8},
+      "value": 0
+    },
+    "tooltip": [
+      {"field": "trippurp", "type": "nominal", "title": "Purpose"},
+      {"field": "linkmode", "type": "nominal", "title": "Transport Mode"},
+      {"field": "cumdist", "type": "quantitative", "title": "Distance (km)"},
+      {"field": "triptime", "type": "quantitative", "title": "Duration (mins)"}
+    ]
+  }
+}
