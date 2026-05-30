@@ -15,8 +15,8 @@ const chartsToRender = [
     { id: '#chart_6', spec: 'specs/06_heatmap.json' },
     { id: '#chart_7', spec: 'specs/07_flow_map.json' },
     { id: '#chart_8', spec: 'specs/08_scatter_plot.json' },
-    // { id: '#chart_9', spec: 'specs/09_gantt_chart.json' },
-    // { id: '#chart_10', spec: 'specs/10_stacked_bar.json' }
+    { id: '#chart_9', spec: 'specs/09_gantt_time.json' },
+    { id: '#chart_10', spec: 'specs/10_normalized_bar.json' }
 ];
 
 // 批量渲染

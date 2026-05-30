@@ -1,58 +1,90 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Scatter Plot: Trip Distance vs Time by LGA",
-  "width": "container",
-  "height": 400,
+  "description": "Faceted Scatter Plot with enhanced Jitter",
   "data": {
     "url": "data/A_database_trips_vista_2012_2020_lga_v1.csv"
   },
   "transform": [
     {
-      "filter": "datum.cumdist > 0 && datum.triptime > 0"
+      "calculate": "upper(datum.origLGA)", "as": "orig_upper"
     },
     {
       "filter": {
-        "field": "origLGA",
-        "oneOf": ["Melbourne", "Boroondara", "Monash", "Knox", "Yarra Ranges"]
+        "field": "orig_upper",
+        "oneOf": ["MELBOURNE", "BOROONDARA", "MONASH", "KNOX", "YARRA RANGES"]
       }
+    },
+    {
+      "calculate": "datum.orig_upper == 'YARRA RANGES' ? 'Yarra Ranges' : datum.orig_upper == 'BOROONDARA' ? 'Boroondara' : datum.orig_upper == 'MONASH' ? 'Monash' : datum.orig_upper == 'KNOX' ? 'Knox' : 'Melbourne'", "as": "Display_LGA"
+    },
+    {
+      "calculate": "toNumber(datum.cumdist)", "as": "num_dist"
+    },
+    {
+      "calculate": "toNumber(datum.travtime)", "as": "num_time"
+    },
+    {
+      "filter": "datum.num_dist > 0 && datum.num_time > 0"
+    },
+    {
+      "calculate": "datum.num_time + (random() * 8 - 4)", "as": "jitter_time"
+    },
+    {
+      "calculate": "datum.num_dist + (random() * 1.5 - 0.75)", "as": "jitter_dist"
     }
   ],
-  "mark": {
-    "type": "circle",
-    "opacity": 0.4, 
-    "size": 40,
-    "stroke": "#ffffff",
-    "strokeWidth": 0.2
-  },
-  "encoding": {
-    "x": {
-      "field": "cumdist",
-      "type": "quantitative",
-      "title": "Cumulative Distance (km)",
-      "scale": {"domain": [0, 60]}, 
-      "axis": {"grid": true}
-    },
-    "y": {
-      "field": "triptime", 
-      "type": "quantitative",
-      "title": "Trip Time (mins)",
-      "scale": {"domain": [0, 120]}, 
-      "axis": {"grid": true}
-    },
-    "color": {
-      "field": "origLGA",
+  "spacing": 15,
+  "facet": {
+    "column": {
+      "field": "Display_LGA",
       "type": "nominal",
       "title": "Origin LGA",
-      "scale": {
-        "domain": ["Melbourne", "Boroondara", "Monash", "Knox", "Yarra Ranges"],
-        "scheme": "category10"
+      "header": {
+        "labelFontSize": 14,
+        "labelFontWeight": "bold",
+        "titleFontSize": 15
       },
-      "legend": {"orient": "right"}
+      "sort": ["Melbourne", "Boroondara", "Monash", "Knox", "Yarra Ranges"]
+    }
+  },
+  "spec": {
+    "width": 160,
+    "height": 350,
+    "mark": {
+      "type": "circle",
+      "opacity": 0.2,
+      "size": 12,
+      "clip": true
     },
-    "tooltip": [
-      {"field": "origLGA", "type": "nominal", "title": "From"},
-      {"field": "cumdist", "type": "quantitative", "title": "Distance (km)", "format": ".1f"},
-      {"field": "triptime", "type": "quantitative", "title": "Time (mins)"}
-    ]
+    "encoding": {
+      "x": {
+        "field": "jitter_dist",
+        "type": "quantitative",
+        "title": "Distance (km)",
+        "scale": {"domain": [0, 50]},
+        "axis": {"grid": true, "tickCount": 5}
+      },
+      "y": {
+        "field": "jitter_time",
+        "type": "quantitative",
+        "title": "Time (mins)",
+        "scale": {"domain": [0, 100]},
+        "axis": {"grid": true}
+      },
+      "color": {
+        "field": "Display_LGA",
+        "type": "nominal",
+        "legend": null,
+        "scale": {
+          "domain": ["Melbourne", "Boroondara", "Monash", "Knox", "Yarra Ranges"],
+          "scheme": "category10"
+        }
+      },
+      "tooltip": [
+        {"field": "Display_LGA", "type": "nominal", "title": "From"},
+        {"field": "num_dist", "type": "quantitative", "title": "Real Distance (km)", "format": ".1f"},
+        {"field": "num_time", "type": "quantitative", "title": "Real Time (mins)", "format": "d"}
+      ]
+    }
   }
 }

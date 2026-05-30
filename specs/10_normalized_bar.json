@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "100% Normalized Stacked Bar Chart: Mode Split by Trip Frequency",
+  "width": "container",
+  "height": 400,
+  "data": {
+    "url": "data/A_stacked_trips_vista_2012_2020_lga_v1.csv"
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(replace(datum.Count, ',', ''))",
+      "as": "Clean_Count"
+    },
+    {
+      "joinaggregate": [{"op": "sum", "field": "Clean_Count", "as": "Total_Trips"}],
+      "groupby": ["Trip_Complexity"]
+    },
+    {
+      "calculate": "datum.Clean_Count / datum.Total_Trips",
+      "as": "percent"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "tooltip": true,
+    "cornerRadius": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "Trip_Complexity",
+      "type": "nominal",
+      "title": "Daily Trips per Person (Mobility Frequency)",
+      "sort": ["1-2 Trips (Simple)", "3-4 Trips (Moderate)", "5+ Trips (Complex)"],
+      "axis": {
+        "labelFontSize": 14,
+        "titleFontSize": 15,
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "percent",
+      "type": "quantitative",
+      "title": "Mode Share (%)",
+      "axis": {
+        "format": "%",
+        "titleFontSize": 14
+      }
+    },
+    "color": {
+      "field": "Linkmode",
+      "type": "nominal",
+      "title": "Transport Mode",
+      "scale": {
+        "domain": ["Walking", "Tram", "Public Bus", "Train", "Vehicle Driver"],
+        "range": ["#2ecc71", "#9b59b6", "#f39c12", "#3498db", "#e74c3c"]
+      }
+    },
+    "tooltip": [
+      {"field": "Trip_Complexity", "type": "nominal", "title": "Trip Category"},
+      {"field": "Linkmode", "type": "nominal", "title": "Transport Mode"},
+      {"field": "Clean_Count", "type": "quantitative", "title": "Total Trips", "format": ","},
+      {"field": "percent", "type": "quantitative", "title": "Share", "format": ".1%"}
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Horizontal Stacked Bar for Average Wait vs Travel Time",
+  "width": "container",
+  "height": 250,
+  "data": {
+    "url": "data/A_gantt_trips_vista_2012_2020_lga_v1.csv"
+  },
+  "transform": [
+    {
+      "fold": ["avg_waitime", "avg_travtime"],
+      "as": ["Time_Component", "Minutes"]
+    },
+    {
+      "calculate": "datum.Time_Component == 'avg_waitime' ? 'Average Wait Time' : 'Average Travel Time'",
+      "as": "Phase"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 4,
+    "height": {"band": 0.6}
+  },
+  "encoding": {
+    "y": {
+      "field": "linkmode",
+      "type": "nominal",
+      "title": null,
+      "sort": {"field": "Minutes", "op": "sum", "order": "ascending"},
+      "axis": {
+        "labelFontSize": 14,
+        "labelFontWeight": "bold",
+        "labelPadding": 10
+      }
+    },
+    "x": {
+      "field": "Minutes",
+      "type": "quantitative",
+      "title": "Total Journey Time (mins)",
+      "axis": {
+        "grid": true,
+        "titleFontSize": 13
+      }
+    },
+    "color": {
+      "field": "Phase",
+      "type": "nominal",
+      "title": "Journey Phase",
+      "scale": {
+        "domain": ["Average Wait Time", "Average Travel Time"],
+        "range": ["#e74c3c", "#34495e"] 
+      },
+      "legend": {
+        "orient": "top",
+        "titleFontSize": 12,
+        "labelFontSize": 12
+      }
+    },
+    "order": {
+      "field": "Phase",
+      "sort": "ascending" 
+    },
+    "tooltip": [
+      {"field": "linkmode", "type": "nominal", "title": "Transport Mode"},
+      {"field": "Phase", "type": "nominal", "title": "Phase"},
+      {"field": "Minutes", "type": "quantitative", "title": "Time (mins)", "format": ".1f"}
+    ]
+  }
+}
