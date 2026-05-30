@@ -1,0 +1,70 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Spatiotemporal Heatmap: Top 10 LGAs by Trip Volume",
+  "width": "container",
+  "height": 400,
+  "data": {
+    "url": "data/A_database_trips_vista_2012_2020_lga_v1.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.starthour != null && datum.origLGA != null && datum.origLGA != ''"
+    },
+    {
+      "joinaggregate": [{"op": "count", "as": "TotalTrips"}],
+      "groupby": ["origLGA"]
+    },
+    {
+      "window": [{"op": "dense_rank", "as": "rank"}],
+      "sort": [{"field": "TotalTrips", "order": "descending"}]
+    },
+    {
+      "filter": "datum.rank <= 10"
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "tooltip": true,
+    "cornerRadius": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "starthour",
+      "type": "ordinal",
+      "title": "Time of Day (24h)",
+      "axis": {
+        "labelAngle": 0,
+        "labelExpr": "datum.value + ':00'",
+        "labelFontSize": 11
+      }
+    },
+    "y": {
+      "field": "origLGA",
+      "type": "nominal",
+      "title": "Top 10 LGAs (by Volume)",
+      "sort": {"field": "TotalTrips", "order": "descending", "op": "max"},
+      "axis": {
+        "labelFontSize": 12,
+        "titleFontSize": 14,
+        "labelFontWeight": "bold"
+      }
+    },
+    "color": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "title": "Trip Volume",
+      "scale": {
+        "scheme": "yelloworangered" 
+      },
+      "legend": {
+        "orient": "right",
+        "format": "s"
+      }
+    },
+    "tooltip": [
+      {"field": "origLGA", "type": "nominal", "title": "Location (LGA)"},
+      {"field": "starthour", "type": "ordinal", "title": "Time", "format": "d"},
+      {"aggregate": "count", "type": "quantitative", "title": "Total Trips", "format": ","}
+    ]
+  }
+}

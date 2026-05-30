@@ -1,0 +1,72 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Stacked Area Chart: Trip Volume by Hour and Purpose",
+  "width": "container",
+  "height": 400,
+  "data": {
+    "url": "data/A_database_trips_vista_2012_2020_lga_v1.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.trippurp != null && datum.trippurp != '' && datum.trippurp != 'Change Mode' && datum.trippurp != 'At or Go Home'"
+    },
+    {
+      "aggregate": [{"op": "count", "as": "trip_count"}],
+      "groupby": ["starthour", "trippurp"]
+    },
+    {
+      "impute": "trip_count",
+      "key": "starthour",
+      "keyvals": {"start": 0, "stop": 28, "step": 1},
+      "groupby": ["trippurp"],
+      "value": 0
+    }
+  ],
+  "mark": {
+    "type": "area",
+    "tooltip": true,
+    "interpolate": "monotone",
+    "line": {
+      "color": "#ffffff",
+      "size": 0.5
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "starthour",
+      "type": "quantitative",
+      "title": "Time of Day",
+      "axis": {
+        "tickCount": 15,
+        "labelExpr": "(datum.value % 24) + ':00'",
+        "labelAngle": -45,
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "trip_count",
+      "type": "quantitative",
+      "title": "Volume of Trips",
+      "stack": "zero",
+      "axis": {
+        "grid": true
+      }
+    },
+    "color": {
+      "field": "trippurp",
+      "type": "nominal",
+      "title": "Trip Purpose",
+      "scale": {
+        "scheme": "tableau10"
+      },
+      "legend": {
+        "orient": "right"
+      }
+    },
+    "tooltip": [
+      {"field": "trippurp", "type": "nominal", "title": "Purpose"},
+      {"field": "starthour", "type": "quantitative", "title": "Hour (24h+ format)"},
+      {"field": "trip_count", "type": "quantitative", "title": "Total Trips", "format": ","}
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Car Ownership Choropleth Map",
+  "width": "container",
+  "height": 400,
+  "projection": {
+    "type": "mercator"
+  },
+  "data": {
+    "url": "data/LGA_POLYGON.json",
+    "format": {
+      "type": "topojson",
+      "feature": "LGA_POLYGON" 
+    }
+  },
+  "transform": [
+    {
+      "lookup": "properties.LGA_NAME", 
+      "from": {
+        "data": {
+          "url": "data/A_database_trips_vista_2012_2020_lga_v1.csv" 
+        },
+        "key": "origLGA", 
+        "fields": ["cumdist"] 
+      }
+    }
+  ],
+  "mark": {
+    "type": "geoshape",
+    "stroke": "#ffffff",
+    "strokeWidth": 0.5
+  },
+  "encoding": {
+    "color": {
+      "field": "cumdist",
+      "type": "quantitative",
+      "scale": {
+        "scheme": "oranges"
+      },
+      "title": "Avg Travel Distance (km)"
+    },
+    "tooltip": [
+      {"field": "properties.LGA_NAME", "type": "nominal", "title": "LGA"},
+      {"field": "cumdist", "type": "quantitative", "title": "Average Distance", "format": ".1f"}
+    ]
+  }
+}

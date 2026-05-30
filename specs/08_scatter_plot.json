@@ -1,0 +1,58 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Scatter Plot: Trip Distance vs Time by LGA",
+  "width": "container",
+  "height": 400,
+  "data": {
+    "url": "data/A_database_trips_vista_2012_2020_lga_v1.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.cumdist > 0 && datum.triptime > 0"
+    },
+    {
+      "filter": {
+        "field": "origLGA",
+        "oneOf": ["Melbourne", "Boroondara", "Monash", "Knox", "Yarra Ranges"]
+      }
+    }
+  ],
+  "mark": {
+    "type": "circle",
+    "opacity": 0.4, 
+    "size": 40,
+    "stroke": "#ffffff",
+    "strokeWidth": 0.2
+  },
+  "encoding": {
+    "x": {
+      "field": "cumdist",
+      "type": "quantitative",
+      "title": "Cumulative Distance (km)",
+      "scale": {"domain": [0, 60]}, 
+      "axis": {"grid": true}
+    },
+    "y": {
+      "field": "triptime", 
+      "type": "quantitative",
+      "title": "Trip Time (mins)",
+      "scale": {"domain": [0, 120]}, 
+      "axis": {"grid": true}
+    },
+    "color": {
+      "field": "origLGA",
+      "type": "nominal",
+      "title": "Origin LGA",
+      "scale": {
+        "domain": ["Melbourne", "Boroondara", "Monash", "Knox", "Yarra Ranges"],
+        "scheme": "category10"
+      },
+      "legend": {"orient": "right"}
+    },
+    "tooltip": [
+      {"field": "origLGA", "type": "nominal", "title": "From"},
+      {"field": "cumdist", "type": "quantitative", "title": "Distance (km)", "format": ".1f"},
+      {"field": "triptime", "type": "quantitative", "title": "Time (mins)"}
+    ]
+  }
+}

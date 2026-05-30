@@ -1,0 +1,108 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Morning Peak Traffic Flow to CBD",
+  "width": "container",
+  "height": 500,
+  "projection": {
+    "type": "mercator",
+    "center": [144.98, -37.83], 
+    "scale": 45000 
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/LGA_POLYGON.json",
+        "format": {"type": "topojson", "feature": "LGA_POLYGON"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e2e8f0",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.2
+      }
+    },
+    {
+      "data": {
+        "url": "data/A_database_trips_vista_2012_2020_lga_v1.csv"
+      },
+      "transform": [
+        {
+          "calculate": "upper(datum.destLGA)", "as": "dest_upper"
+        },
+        {
+          "calculate": "upper(datum.origLGA)", "as": "orig_upper"
+        },
+        {
+          "filter": "datum.dest_upper == 'MELBOURNE'" 
+        },
+        {
+          "filter": "datum.starthour >= 7 && datum.starthour <= 9"
+        },
+        {
+          "filter": "datum.orig_upper != 'MELBOURNE'" 
+        },
+        {
+          "aggregate": [
+            {"op": "count", "as": "traffic_volume"},
+            {"op": "mean", "field": "travtime", "as": "avg_commute_time"}
+          ],
+          "groupby": ["orig_upper"]
+        },
+        {
+          "lookup": "orig_upper",
+          "from": {
+            "data": {"url": "data/lga_centroids.csv"},
+            "key": "LGA",
+            "fields": ["lon", "lat"]
+          }
+        },
+        {
+          "filter": "datum.lon != null && datum.lat != null" 
+        },
+        {
+          "calculate": "'Melbourne (CBD)'", "as": "dest_label"
+        },
+        {
+          "calculate": "144.9631", "as": "dest_lon"
+        },
+        {
+          "calculate": "-37.8136", "as": "dest_lat"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "opacity": 0.65,
+        "strokeCap": "round"
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "longitude2": {"field": "dest_lon", "type": "quantitative"}, 
+        "latitude2": {"field": "dest_lat", "type": "quantitative"}, 
+        "size": {
+          "field": "traffic_volume",
+          "type": "quantitative",
+          "scale": {"range": [1, 10]}, 
+          "title": "Traffic Volume (Trips)"
+        },
+        "color": {
+          "field": "avg_commute_time",
+          "type": "quantitative",
+          "scale": {"scheme": "plasma"},
+          "title": "Avg Commute Time (mins)"
+        },
+        "order": {
+          "field": "avg_commute_time",
+          "type": "quantitative",
+          "sort": "descending" 
+        },
+        "tooltip": [
+          {"field": "orig_upper", "type": "nominal", "title": "From"},
+          {"field": "dest_label", "type": "nominal", "title": "To"},
+          {"field": "traffic_volume", "type": "quantitative", "title": "Total Morning Trips"},
+          {"field": "avg_commute_time", "type": "quantitative", "title": "Average Time (mins)", "format": ".1f"}
+        ]
+      }
+    }
+  ]
+}
