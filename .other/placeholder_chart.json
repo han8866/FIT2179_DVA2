@@ -1,0 +1,12 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 300,
+  "height": 250,
+  "title": "Chart Grid Preview (Data Pending)",
+  "data": {"values": [{"x": "A", "y": 2}, {"x": "B", "y": 4}, {"x": "C", "y": 3}]},
+  "mark": {"type": "bar", "color": "#dddddd"},
+  "encoding": {
+    "x": {"field": "x", "type": "nominal", "axis": {"title": "Sample Axis X"}},
+    "y": {"field": "y", "type": "quantitative", "axis": {"title": "Sample Axis Y"}}
+  }
+}

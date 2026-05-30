@@ -3,97 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victoria - On the Move</title>
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css">
-    
-    <link rel="stylesheet" href="style.css">
-    
+    <title>The Anatomy of Gridlock: Victoria's Transport</title>
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
 <body>
+    <div class="page-container">
+        <header>
+            <h1 class="main-title">The Anatomy of Gridlock</h1>
+            <p class="sub-title">Why Victoria Cannot Ditch the Car</p>
+        </header>
 
-<div class="page-container">
-    <h1 class="main-title">Victoria - On the Move</h1>
-    <p class="sub-title">A Comprehensive Data Narrative of State-Wide Transit Patterns and Commuter Choices</p>
-
-    <section class="dashboard-row">
-        <h2 class="row-title">Chapter 1: How Victorians Move Around?</h2>
-        <div class="row-content">
-            <div class="vis-block">
-                <div class="vis-chart" id="chart_1"></div>
-                <div class="vis-text">
-                    <h3>Figure 1: Spatial Traffic Density Map</h3>
-                    <p>This geographic visualization highlights key traffic arteries and congestion hotspots across Victorian Local Government Areas (LGAs).</p>
-                </div>
-            </div>
-            <div class="vis-block">
-                <div class="vis-chart" id="chart_2"></div>
-                <div class="vis-text">
-                    <h3>Figure 2: Primary Transport Mode Share</h3>
-                    <p>An overview of how Victorians distribute their trips across private vehicles, trains, trams, walking, and cycling.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="dashboard-row">
-        <h2 class="row-title">Chapter 2: Where Movement Breaks Down?</h2>
-        
-        <div class="row-content-vertical">
+        <section class="dashboard-row" id="chapter-1">
+            <h2 class="row-title">Chapter 1: The Status Quo & The Constraints</h2>
             
-            <div class="vis-block">
-                <div class="vis-chart" id="chart_3"></div>
-                <div class="vis-text">
-                    <h3>Figure 3: Travel Distance vs. Duration</h3>
-                    <p>This scatter plot reveals the metropolitan 'congestion tax', where short urban commutes often require disproportionate travel time compared to regional trips.</p>
+            <div class="row-content">
+                <div class="vis-block">
+                    <div class="vis-text">
+                        <h3>Figure 1: The Dominance of Cars</h3>
+                        <p>While public transport is heavily promoted, the reality is stark...</p>
+                    </div>
+                    <div class="vis-chart" id="chart_1"></div>
                 </div>
-            </div>
 
-            <div class="vis-block vis-block-f4">
-                <div class="vis-text">
-                    <h3>Figure 4: Trip Purposes & Mode Allocation</h3>
-                    <p>An analytical breakdown investigating the primary drivers behind daily citizen travel and shifting vehicle reliance.</p>
+                <div class="vis-block">
+                    <div class="vis-text">
+                        <h3>Figure 2: Car Ownership Concentration</h3>
+                        <p>Living in the outer suburbs means relying on vehicles...</p>
+                    </div>
+                    <div class="vis-chart" id="chart_2"></div>
                 </div>
-                <div class="vis-chart" id="chart_4"></div>
             </div>
+        </section>
 
         </div>
-    </section>
 
-    <section class="dashboard-row">
-        <h2 class="row-title">Chapter 3: Emerging Patterns of Sustainable Mobility</h2>
-        <div class="row-content">
-            <div class="vis-block">
-                <div class="vis-chart" id="chart_5"></div>
-                <div class="vis-text">
-                    <h3>Figure 5: Public Transport Reliability Index</h3>
-                    <p>An evaluation of transit performance. Punctuality and frequency discrepancies serve as primary obstacles preventing regional commuters from shifting away from private vehicles.</p>
-                </div>
-            </div>
-            <div class="vis-block">
-                <div class="vis-chart" id="chart_6"></div>
-                <div class="vis-text">
-                    <h3>Figure 6: Environmental Impact Modeling</h3>
-                    <p>A projection displaying potential carbon reduction margins achieved by converting solo car commutes into active cycling or train transit.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
-
-<script>
-    const embedOpt = {"actions": false};
-
-    vegaEmbed('#chart_1', 'placeholder_chart.json', embedOpt).catch(console.error);
-    vegaEmbed('#chart_2', 'mode_share_chart.json', embedOpt).catch(console.error);
-    vegaEmbed('#chart_4', 'bar_chart.json').catch(console.error);
-    vegaEmbed('#chart_5', 'placeholder_chart.json', embedOpt).catch(console.error);
-    vegaEmbed('#chart_6', 'placeholder_chart.json', embedOpt).catch(console.error);
-    vegaEmbed('#chart_3', 'scatter_chart.json').catch(console.error);
-</script>
-
+    <script src="js/main.js"></script>
 </body>
 </html>
