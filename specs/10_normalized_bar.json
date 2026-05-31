@@ -4,7 +4,7 @@
   "width": "container",
   "height": 400,
   "data": {
-    "url": "data/A_stacked_trips_vista_2012_2020_lga_v1.csv"
+    "url": "data/Chart10_normstackbar_data.csv"
   },
   "transform": [
     {
@@ -53,6 +53,9 @@
       "scale": {
         "domain": ["Walking", "Tram", "Public Bus", "Train", "Vehicle Driver"],
         "range": ["#2ecc71", "#9b59b6", "#f39c12", "#3498db", "#e74c3c"]
+      },
+      "legend": {
+        "orient": "bottom"
       }
     },
     "tooltip": [

@@ -1,28 +1,32 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Car Ownership Choropleth Map",
+  "description": "Average Commuting Distance Choropleth Map",
   "width": "container",
-  "height": 400,
+  "height": 500,
   "projection": {
     "type": "mercator"
   },
   "data": {
-    "url": "data/LGA_POLYGON.json",
-    "format": {
-      "type": "topojson",
-      "feature": "LGA_POLYGON" 
-    }
+    "url": "data/Chart2_choropleth_data.csv" 
   },
   "transform": [
     {
-      "lookup": "properties.LGA_NAME", 
+      "calculate": "trim(upper(datum.origLGA))",
+      "as": "orig_upper"
+    },
+    {
+      "lookup": "orig_upper",
       "from": {
         "data": {
-          "url": "data/A_database_trips_vista_2012_2020_lga_v1.csv" 
+          "url": "data/LGA_POLYGON.json",
+          "format": {
+            "type": "topojson",
+            "feature": "LGA_POLYGON"
+          }
         },
-        "key": "origLGA", 
-        "fields": ["cumdist"] 
-      }
+        "key": "properties.LGA_NAME"
+      },
+      "as": "geo" 
     }
   ],
   "mark": {
@@ -31,17 +35,25 @@
     "strokeWidth": 0.5
   },
   "encoding": {
+    "shape": {
+      "field": "geo",
+      "type": "geojson"
+    },
     "color": {
-      "field": "cumdist",
+      "field": "Avg_Distance",
       "type": "quantitative",
       "scale": {
-        "scheme": "oranges"
+        "type": "log", 
+        "scheme": "yelloworangered"
       },
-      "title": "Avg Travel Distance (km)"
+      "title": "Avg Distance (km)",
+      "legend": {
+        "orient": "left"
+      }
     },
     "tooltip": [
-      {"field": "properties.LGA_NAME", "type": "nominal", "title": "LGA"},
-      {"field": "cumdist", "type": "quantitative", "title": "Average Distance", "format": ".1f"}
+      {"field": "origLGA", "type": "nominal", "title": "Origin LGA"},
+      {"field": "Avg_Distance", "type": "quantitative", "title": "Average Distance (km)", "format": ".1f"}
     ]
   }
 }

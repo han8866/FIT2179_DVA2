@@ -4,7 +4,7 @@
   "width": "container",
   "height": 250,
   "data": {
-    "url": "data/A_gantt_trips_vista_2012_2020_lga_v1.csv"
+    "url": "data/Chart9_gantt_data.csv"
   },
   "transform": [
     {
@@ -48,7 +48,7 @@
       "title": "Journey Phase",
       "scale": {
         "domain": ["Average Wait Time", "Average Travel Time"],
-        "range": ["#e74c3c", "#34495e"] 
+        "range": ["#7f8c8d", "#34495e"]
       },
       "legend": {
         "orient": "top",

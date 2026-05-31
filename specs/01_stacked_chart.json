@@ -4,25 +4,25 @@
   "width": "container",
   "height": 100,
   "data": {
-    "url": "data/A_database_trips_vista_2012_2020_lga_v1.csv"
+    "url": "data/Chart1_overview_data.csv"
   },
   "transform": [
     {
-      "filter": {
-        "field": "linkmode",
-        "oneOf": ["Vehicle Driver", "Train", "Public Bus", "Walking"]
-      }
+      "joinaggregate": [{"op": "sum", "field": "trip_count", "as": "Total_Trips"}]
+    },
+    {
+      "calculate": "datum.trip_count / datum.Total_Trips",
+      "as": "Percentage"
     }
   ],
   "mark": {
     "type": "bar",
-    "tooltip": true
+    "cornerRadius": 2
   },
   "encoding": {
     "x": {
-      "aggregate": "count",
+      "field": "Percentage",
       "type": "quantitative",
-      "stack": "normalize",
       "axis": {
         "format": "%",
         "title": "Percentage of Total Trips",
@@ -36,17 +36,19 @@
       "type": "nominal",
       "title": "Transport Mode",
       "scale": {
-        "domain": ["Vehicle Driver", "Train", "Public Bus", "Walking"],
-        "range": ["#e74c3c", "#3498db", "#f39c12", "#2ecc71"] 
+        "domain": ["Walking", "Public Bus", "Train", "Vehicle Driver"],
+        "range": ["#2ecc71", "#f39c12", "#3498db", "#e74c3c"]
       },
-      "legend": {
-        "orient": "top",
-        "title": null
-      }
+      "legend": {"orient": "left"}
     },
     "order": {
       "field": "linkmode",
       "sort": "ascending"
-    }
+    },
+    "tooltip": [
+      {"field": "linkmode", "type": "nominal", "title": "Mode"},
+      {"field": "trip_count", "type": "quantitative", "title": "Total Trips", "format": ","},
+      {"field": "Percentage", "type": "quantitative", "title": "Share", "format": ".1%"}
+    ]
   }
 }

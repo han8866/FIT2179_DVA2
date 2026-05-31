@@ -4,69 +4,145 @@
   "width": "container",
   "height": 400,
   "data": {
-    "url": "data/A_database_trips_vista_2012_2020_lga_v1.csv"
+    "url": "data/Chart5_area_data.csv"
   },
   "transform": [
     {
-      "filter": "datum.trippurp != null && datum.trippurp != '' && datum.trippurp != 'Change Mode' && datum.trippurp != 'At or Go Home'"
+      "calculate": "indexof(['Pick-up or Deliver Some thing', 'Pick-up or Deliver Something', 'Personal Business', 'Unknown Purpose', 'Other Purpose', 'Not Stated'], datum.trippurp) >= 0 ? 'Other' : datum.trippurp",
+      "as": "Clean_Purpose"
     },
     {
-      "aggregate": [{"op": "count", "as": "trip_count"}],
-      "groupby": ["starthour", "trippurp"]
+      "calculate": "datum.Clean_Purpose == 'Other' ? 1 : datum.Clean_Purpose == 'Accompany Someone' ? 2 : datum.Clean_Purpose == 'Recreational' ? 3 : datum.Clean_Purpose == 'Social' ? 4 : datum.Clean_Purpose == 'Education' ? 5 : datum.Clean_Purpose == 'Work Related' ? 6 : datum.Clean_Purpose == 'Pick-up or Drop-off Someone' ? 7 : datum.Clean_Purpose == 'Buy Something' ? 8 : 9",
+      "as": "sort_rank"
     },
     {
-      "impute": "trip_count",
-      "key": "starthour",
-      "keyvals": {"start": 0, "stop": 28, "step": 1},
-      "groupby": ["trippurp"],
-      "value": 0
+      "aggregate": [{"op": "sum", "field": "Raw_Count", "as": "trip_count"}],
+      "groupby": ["starthour", "Clean_Purpose", "sort_rank"]
     }
   ],
-  "mark": {
-    "type": "area",
-    "tooltip": true,
-    "interpolate": "monotone",
-    "line": {
-      "color": "#ffffff",
-      "size": 0.5
-    }
-  },
-  "encoding": {
-    "x": {
-      "field": "starthour",
-      "type": "quantitative",
-      "title": "Time of Day",
-      "axis": {
-        "tickCount": 15,
-        "labelExpr": "(datum.value % 24) + ':00'",
-        "labelAngle": -45,
-        "grid": false
-      }
-    },
-    "y": {
-      "field": "trip_count",
-      "type": "quantitative",
-      "title": "Volume of Trips",
-      "stack": "zero",
-      "axis": {
-        "grid": true
-      }
-    },
-    "color": {
-      "field": "trippurp",
-      "type": "nominal",
-      "title": "Trip Purpose",
-      "scale": {
-        "scheme": "tableau10"
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "highlight",
+          "select": {
+            "type": "point",
+            "fields": ["Clean_Purpose"],
+            "on": "pointerover",
+            "clear": "pointerout"
+          },
+          "bind": "legend"
+        }
+      ],
+      "mark": {
+        "type": "area",
+        "tooltip": true,
+        "interpolate": "monotone",
+        "line": {
+          "color": "#ffffff",
+          "size": 0.5
+        }
       },
-      "legend": {
-        "orient": "right"
+      "encoding": {
+        "x": {
+          "field": "starthour",
+          "type": "quantitative",
+          "title": "Time of Day (Hour)",
+          "scale": {"domain": [2, 26]}, 
+          "axis": {"tickCount": 12, "grid": false}
+        },
+        "y": {
+          "field": "trip_count",
+          "type": "quantitative",
+          "title": "Total Trips",
+          "axis": {"orient": "right"} 
+        },
+        "color": {
+          "field": "Clean_Purpose",
+          "type": "nominal",
+          "title": "Trip Purpose",
+          "scale": {
+            "scheme": "tableau10",
+            "domain": [
+              "Buy Something",
+              "Pick-up or Drop-off Someone",
+              "Work Related",
+              "Education",
+              "Social",
+              "Recreational",
+              "Accompany Someone",
+              "Other"
+            ]
+          },
+          "legend": {"orient": "left"}
+        },
+        "opacity": {
+          "condition": {
+            "param": "highlight",
+            "value": 1
+          },
+          "value": 0.2
+        },
+        "order": {
+          "field": "sort_rank",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {"field": "Clean_Purpose", "type": "nominal", "title": "Purpose"},
+          {"field": "starthour", "type": "quantitative", "title": "Hour (24h+ format)"},
+          {"field": "trip_count", "type": "quantitative", "title": "Total Trips", "format": ","}
+        ]
       }
     },
-    "tooltip": [
-      {"field": "trippurp", "type": "nominal", "title": "Purpose"},
-      {"field": "starthour", "type": "quantitative", "title": "Hour (24h+ format)"},
-      {"field": "trip_count", "type": "quantitative", "title": "Total Trips", "format": ","}
-    ]
-  }
+    {
+      "data": {
+        "values": [
+          {"peak_hour": 8, "label": "Morning Peak"},
+          {"peak_hour": 15, "label": "Evening Peak"}
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "strokeDash": [4, 4],
+            "color": "#00000064",
+            "size": 1.5,
+            "opacity": 0.8
+          },
+          "encoding": {
+            "x": {
+              "field": "peak_hour",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "bottom",
+            "dy": -5,
+            "dx": 5,
+            "color": "#34495e",
+            "fontWeight": "bold",
+            "fontSize": 12
+          },
+          "encoding": {
+            "x": {
+              "field": "peak_hour",
+              "type": "quantitative"
+            },
+            "y": {
+              "value": 0
+            },
+            "text": {
+              "field": "label",
+              "type": "nominal"
+            }
+          }
+        }
+      ]
+    }
+  ]
 }

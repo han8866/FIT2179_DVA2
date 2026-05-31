@@ -1,0 +1,297 @@
+﻿linkmode,starthour,TotalTrips
+Bicycle,3,1
+Bicycle,4,8
+Bicycle,5,37
+Bicycle,6,98
+Bicycle,7,246
+Bicycle,8,479
+Bicycle,9,210
+Bicycle,10,162
+Bicycle,11,178
+Bicycle,12,157
+Bicycle,13,130
+Bicycle,14,156
+Bicycle,15,357
+Bicycle,16,315
+Bicycle,17,360
+Bicycle,18,222
+Bicycle,19,98
+Bicycle,20,66
+Bicycle,21,43
+Bicycle,22,31
+Bicycle,23,9
+Bicycle,24,1
+Bicycle,26,1
+Jogging,4,2
+Jogging,5,5
+Jogging,6,1
+Jogging,7,5
+Jogging,8,4
+Jogging,9,8
+Jogging,10,5
+Jogging,11,6
+Jogging,12,5
+Jogging,13,6
+Jogging,14,5
+Jogging,15,1
+Jogging,16,3
+Jogging,17,10
+Jogging,18,23
+Jogging,19,24
+Jogging,20,10
+Jogging,21,12
+Jogging,22,15
+Jogging,23,21
+Jogging,24,10
+Jogging,25,3
+Jogging,26,8
+Jogging,27,2
+Mobility Scooter,7,1
+Mobility Scooter,8,2
+Mobility Scooter,9,1
+Mobility Scooter,10,5
+Mobility Scooter,11,4
+Mobility Scooter,12,1
+Mobility Scooter,13,1
+Mobility Scooter,14,3
+Mobility Scooter,16,2
+Mobility Scooter,17,1
+Mobility Scooter,20,2
+Mobility Scooter,22,1
+Motorcycle,4,1
+Motorcycle,5,10
+Motorcycle,6,17
+Motorcycle,7,31
+Motorcycle,8,30
+Motorcycle,9,23
+Motorcycle,10,20
+Motorcycle,11,29
+Motorcycle,12,25
+Motorcycle,13,26
+Motorcycle,14,33
+Motorcycle,15,36
+Motorcycle,16,35
+Motorcycle,17,50
+Motorcycle,18,26
+Motorcycle,19,10
+Motorcycle,20,9
+Motorcycle,21,5
+Motorcycle,22,7
+Motorcycle,23,4
+Motorcycle,24,3
+Other,1,1
+Other,2,2
+Other,4,3
+Other,5,5
+Other,6,28
+Other,7,36
+Other,8,51
+Other,9,45
+Other,10,36
+Other,11,36
+Other,12,40
+Other,13,35
+Other,14,40
+Other,15,65
+Other,16,38
+Other,17,55
+Other,18,59
+Other,19,51
+Other,20,25
+Other,21,5
+Other,22,6
+Other,23,9
+Other,24,2
+Public Bus,1,1
+Public Bus,4,1
+Public Bus,5,6
+Public Bus,6,41
+Public Bus,7,260
+Public Bus,8,223
+Public Bus,9,139
+Public Bus,10,156
+Public Bus,11,159
+Public Bus,12,144
+Public Bus,13,108
+Public Bus,14,153
+Public Bus,15,426
+Public Bus,16,137
+Public Bus,17,153
+Public Bus,18,65
+Public Bus,19,27
+Public Bus,20,16
+Public Bus,21,9
+Public Bus,22,3
+Public Bus,23,1
+Public Bus,24,2
+Public Bus,25,1
+School Bus,6,5
+School Bus,7,204
+School Bus,8,134
+School Bus,9,28
+School Bus,10,18
+School Bus,11,21
+School Bus,12,10
+School Bus,13,16
+School Bus,14,36
+School Bus,15,346
+School Bus,16,15
+School Bus,17,9
+School Bus,18,2
+School Bus,19,2
+School Bus,21,1
+Taxi,1,10
+Taxi,2,10
+Taxi,3,4
+Taxi,4,12
+Taxi,5,14
+Taxi,6,9
+Taxi,7,14
+Taxi,8,27
+Taxi,9,41
+Taxi,10,40
+Taxi,11,27
+Taxi,12,54
+Taxi,13,27
+Taxi,14,39
+Taxi,15,37
+Taxi,16,29
+Taxi,17,22
+Taxi,18,30
+Taxi,19,28
+Taxi,20,27
+Taxi,21,20
+Taxi,22,37
+Taxi,23,34
+Taxi,24,4
+Taxi,25,6
+Taxi,26,3
+Taxi,27,6
+Train,1,4
+Train,4,30
+Train,5,166
+Train,6,512
+Train,7,1447
+Train,8,945
+Train,9,339
+Train,10,284
+Train,11,273
+Train,12,263
+Train,13,268
+Train,14,333
+Train,15,687
+Train,16,897
+Train,17,1363
+Train,18,481
+Train,19,172
+Train,20,76
+Train,21,76
+Train,22,81
+Train,23,59
+Train,24,1
+Train,25,1
+Tram,4,1
+Tram,5,14
+Tram,6,57
+Tram,7,208
+Tram,8,282
+Tram,9,132
+Tram,10,130
+Tram,11,138
+Tram,12,152
+Tram,13,154
+Tram,14,150
+Tram,15,218
+Tram,16,189
+Tram,17,268
+Tram,18,163
+Tram,19,81
+Tram,20,43
+Tram,21,45
+Tram,22,47
+Tram,23,16
+Tram,24,3
+Vehicle Driver,1,42
+Vehicle Driver,2,28
+Vehicle Driver,3,13
+Vehicle Driver,4,364
+Vehicle Driver,5,1498
+Vehicle Driver,6,3477
+Vehicle Driver,7,6625
+Vehicle Driver,8,10825
+Vehicle Driver,9,7142
+Vehicle Driver,10,7543
+Vehicle Driver,11,7705
+Vehicle Driver,12,6687
+Vehicle Driver,13,5904
+Vehicle Driver,14,6714
+Vehicle Driver,15,9781
+Vehicle Driver,16,8617
+Vehicle Driver,17,8909
+Vehicle Driver,18,5509
+Vehicle Driver,19,3265
+Vehicle Driver,20,2123
+Vehicle Driver,21,1652
+Vehicle Driver,22,1230
+Vehicle Driver,23,578
+Vehicle Driver,24,90
+Vehicle Driver,25,52
+Vehicle Driver,26,27
+Vehicle Driver,27,14
+Vehicle Driver,28,2
+Vehicle Driver,30,1
+Vehicle Passenger,1,18
+Vehicle Passenger,2,11
+Vehicle Passenger,3,6
+Vehicle Passenger,4,40
+Vehicle Passenger,5,106
+Vehicle Passenger,6,373
+Vehicle Passenger,7,1592
+Vehicle Passenger,8,6119
+Vehicle Passenger,9,2583
+Vehicle Passenger,10,3201
+Vehicle Passenger,11,3582
+Vehicle Passenger,12,3284
+Vehicle Passenger,13,2777
+Vehicle Passenger,14,2762
+Vehicle Passenger,15,6241
+Vehicle Passenger,16,3623
+Vehicle Passenger,17,3533
+Vehicle Passenger,18,2731
+Vehicle Passenger,19,1646
+Vehicle Passenger,20,1224
+Vehicle Passenger,21,915
+Vehicle Passenger,22,641
+Vehicle Passenger,23,283
+Vehicle Passenger,24,45
+Vehicle Passenger,25,12
+Vehicle Passenger,26,7
+Vehicle Passenger,27,6
+Vehicle Passenger,28,1
+Walking,1,1
+Walking,2,2
+Walking,3,3
+Walking,4,39
+Walking,5,124
+Walking,6,674
+Walking,7,1166
+Walking,8,3257
+Walking,9,2268
+Walking,10,2304
+Walking,11,2277
+Walking,12,2650
+Walking,13,2335
+Walking,14,1916
+Walking,15,3571
+Walking,16,2544
+Walking,17,2415
+Walking,18,2152
+Walking,19,1634
+Walking,20,904
+Walking,21,351
+Walking,22,172
+Walking,23,87
+Walking,24,6
+Walking,25,2
+Walking,26,9
+Walking,27,2

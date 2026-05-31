@@ -2,17 +2,11 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Faceted Scatter Plot with enhanced Jitter",
   "data": {
-    "url": "data/A_database_trips_vista_2012_2020_lga_v1.csv"
+    "url": "data/Chart8_scatter_data.csv" 
   },
   "transform": [
     {
       "calculate": "upper(datum.origLGA)", "as": "orig_upper"
-    },
-    {
-      "filter": {
-        "field": "orig_upper",
-        "oneOf": ["MELBOURNE", "BOROONDARA", "MONASH", "KNOX", "YARRA RANGES"]
-      }
     },
     {
       "calculate": "datum.orig_upper == 'YARRA RANGES' ? 'Yarra Ranges' : datum.orig_upper == 'BOROONDARA' ? 'Boroondara' : datum.orig_upper == 'MONASH' ? 'Monash' : datum.orig_upper == 'KNOX' ? 'Knox' : 'Melbourne'", "as": "Display_LGA"
@@ -22,9 +16,6 @@
     },
     {
       "calculate": "toNumber(datum.travtime)", "as": "num_time"
-    },
-    {
-      "filter": "datum.num_dist > 0 && datum.num_time > 0"
     },
     {
       "calculate": "datum.num_time + (random() * 8 - 4)", "as": "jitter_time"

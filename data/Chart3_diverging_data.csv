@@ -1,0 +1,76 @@
+﻿origLGA,linkmode,trip_count
+BOROONDARA,Bicycle,131
+BOROONDARA,Jogging,14
+BOROONDARA,Motorcycle,17
+BOROONDARA,Other,50
+BOROONDARA,Public Bus,74
+BOROONDARA,School Bus,30
+BOROONDARA,Taxi,26
+BOROONDARA,Train,377
+BOROONDARA,Tram,210
+BOROONDARA,Vehicle Driver,4800
+BOROONDARA,Vehicle Passenger,2140
+BOROONDARA,Walking,2069
+KNOX,Bicycle,53
+KNOX,Jogging,4
+KNOX,Mobility Scooter,2
+KNOX,Motorcycle,9
+KNOX,Other,9
+KNOX,Public Bus,68
+KNOX,School Bus,27
+KNOX,Taxi,4
+KNOX,Train,149
+KNOX,Tram,5
+KNOX,Vehicle Driver,4318
+KNOX,Vehicle Passenger,1760
+KNOX,Walking,816
+MELBOURNE,Bicycle,407
+MELBOURNE,Jogging,38
+MELBOURNE,Mobility Scooter,2
+MELBOURNE,Motorcycle,57
+MELBOURNE,Other,50
+MELBOURNE,Public Bus,165
+MELBOURNE,School Bus,5
+MELBOURNE,Taxi,141
+MELBOURNE,Train,3046
+MELBOURNE,Tram,1047
+MELBOURNE,Vehicle Driver,3201
+MELBOURNE,Vehicle Passenger,1135
+MELBOURNE,Walking,3529
+MONASH,Bicycle,79
+MONASH,Jogging,2
+MONASH,Motorcycle,22
+MONASH,Other,24
+MONASH,Public Bus,180
+MONASH,School Bus,36
+MONASH,Taxi,13
+MONASH,Train,374
+MONASH,Tram,9
+MONASH,Vehicle Driver,5468
+MONASH,Vehicle Passenger,2385
+MONASH,Walking,1301
+YARRA,Bicycle,273
+YARRA,Jogging,13
+YARRA,Mobility Scooter,2
+YARRA,Motorcycle,16
+YARRA,Other,28
+YARRA,Public Bus,32
+YARRA,School Bus,1
+YARRA,Taxi,31
+YARRA,Train,325
+YARRA,Tram,227
+YARRA,Vehicle Driver,1813
+YARRA,Vehicle Passenger,653
+YARRA,Walking,1340
+YARRA RANGES,Bicycle,37
+YARRA RANGES,Jogging,4
+YARRA RANGES,Mobility Scooter,2
+YARRA RANGES,Motorcycle,7
+YARRA RANGES,Other,12
+YARRA RANGES,Public Bus,32
+YARRA RANGES,School Bus,38
+YARRA RANGES,Taxi,3
+YARRA RANGES,Train,81
+YARRA RANGES,Vehicle Driver,3228
+YARRA RANGES,Vehicle Passenger,1539
+YARRA RANGES,Walking,572

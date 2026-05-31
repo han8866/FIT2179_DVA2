@@ -4,67 +4,125 @@
   "width": "container",
   "height": 400,
   "data": {
-    "url": "data/A_database_trips_vista_2012_2020_lga_v1.csv"
+    "url": "data/Chart6_heatmap_data.csv" 
   },
   "transform": [
     {
-      "filter": "datum.starthour != null && datum.origLGA != null && datum.origLGA != ''"
+      "calculate": "toNumber(datum.starthour)",
+      "as": "hour_num"
     },
     {
-      "joinaggregate": [{"op": "count", "as": "TotalTrips"}],
+      "joinaggregate": [{"op": "sum", "field": "TotalTrips", "as": "LGATotal"}],
       "groupby": ["origLGA"]
     },
     {
       "window": [{"op": "dense_rank", "as": "rank"}],
-      "sort": [{"field": "TotalTrips", "order": "descending"}]
+      "sort": [{"field": "LGATotal", "order": "descending"}]
     },
     {
       "filter": "datum.rank <= 10"
     }
   ],
-  "mark": {
-    "type": "rect",
-    "tooltip": true,
-    "cornerRadius": 2
-  },
-  "encoding": {
-    "x": {
-      "field": "starthour",
-      "type": "ordinal",
-      "title": "Time of Day (24h)",
-      "axis": {
-        "labelAngle": 0,
-        "labelExpr": "datum.value + ':00'",
-        "labelFontSize": 11
-      }
-    },
-    "y": {
-      "field": "origLGA",
-      "type": "nominal",
-      "title": "Top 10 LGAs (by Volume)",
-      "sort": {"field": "TotalTrips", "order": "descending", "op": "max"},
-      "axis": {
-        "labelFontSize": 12,
-        "titleFontSize": 14,
-        "labelFontWeight": "bold"
-      }
-    },
-    "color": {
-      "aggregate": "count",
-      "type": "quantitative",
-      "title": "Trip Volume",
-      "scale": {
-        "scheme": "yelloworangered" 
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "tooltip": true,
+        "cornerRadius": 2
       },
-      "legend": {
-        "orient": "right",
-        "format": "s"
+      "encoding": {
+        "x": {
+          "field": "hour_num",
+          "type": "ordinal",
+          "title": "Time of Day (24h)",
+          "scale": {
+            "domain": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+          },
+          "axis": {
+            "labelAngle": 0,
+            "labelExpr": "datum.value % 3 == 0 ? datum.value + ':00' : ''", 
+            "labelFontSize": 11
+          }
+        },
+        "y": {
+          "field": "origLGA",
+          "type": "nominal",
+          "title": "Top 10 LGAs (by Volume)",
+          "sort": {"field": "LGATotal", "order": "descending", "op": "max"},
+          "axis": {
+            "labelFontSize": 12,
+            "titleFontSize": 14,
+            "labelFontWeight": "bold"
+          }
+        },
+        "color": {
+          "field": "TotalTrips", 
+          "type": "quantitative",
+          "title": "Trip Volume",
+          "scale": {
+            "scheme": "yelloworangered" 
+          },
+          "legend": {
+            "orient": "right", 
+            "format": "s"
+          }
+        },
+        "tooltip": [
+          {"field": "origLGA", "type": "nominal", "title": "Location (LGA)"},
+          {"field": "hour_num", "type": "ordinal", "title": "Time", "format": "d"},
+          {"field": "TotalTrips", "type": "quantitative", "title": "Total Trips", "format": ","}
+        ]
       }
     },
-    "tooltip": [
-      {"field": "origLGA", "type": "nominal", "title": "Location (LGA)"},
-      {"field": "starthour", "type": "ordinal", "title": "Time", "format": "d"},
-      {"aggregate": "count", "type": "quantitative", "title": "Total Trips", "format": ","}
-    ]
-  }
+    {
+      "data": {
+        "values": [
+          {"peak_hour": 8, "label": "Morning Peak"},
+          {"peak_hour": 16, "label": "Evening Peak"}
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "strokeDash": [4, 4],
+            "color": "#5e3f34",
+            "size": 1.5,
+            "opacity": 0.7
+          },
+          "encoding": {
+            "x": {
+              "field": "peak_hour",
+              "type": "ordinal"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "bottom",
+            "dy": -5,
+            "dx": 5,
+            "color": "#5e3434",
+            "fontWeight": "bold",
+            "fontSize": 12
+          },
+          "encoding": {
+            "x": {
+              "field": "peak_hour",
+              "type": "ordinal"
+            },
+            "y": {
+              "value": 0
+            },
+            "text": {
+              "field": "label",
+              "type": "nominal"
+            }
+          }
+        }
+      ]
+    }
+  ]
 }

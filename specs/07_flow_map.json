@@ -23,30 +23,11 @@
     },
     {
       "data": {
-        "url": "data/A_database_trips_vista_2012_2020_lga_v1.csv"
+        "url": "data/Chart7_flow_data.csv" 
       },
       "transform": [
         {
-          "calculate": "upper(datum.destLGA)", "as": "dest_upper"
-        },
-        {
-          "calculate": "upper(datum.origLGA)", "as": "orig_upper"
-        },
-        {
-          "filter": "datum.dest_upper == 'MELBOURNE'" 
-        },
-        {
-          "filter": "datum.starthour >= 7 && datum.starthour <= 9"
-        },
-        {
-          "filter": "datum.orig_upper != 'MELBOURNE'" 
-        },
-        {
-          "aggregate": [
-            {"op": "count", "as": "traffic_volume"},
-            {"op": "mean", "field": "travtime", "as": "avg_commute_time"}
-          ],
-          "groupby": ["orig_upper"]
+          "calculate": "upper(datum.orig_upper)", "as": "orig_upper"
         },
         {
           "lookup": "orig_upper",
@@ -83,13 +64,25 @@
           "field": "traffic_volume",
           "type": "quantitative",
           "scale": {"range": [1, 10]}, 
-          "title": "Traffic Volume (Trips)"
+          "title": "Traffic Volume",
+          "legend": {
+            "orient": "bottom-right",
+            "fillColor": "rgba(255, 255, 255, 0.85)",
+            "padding": 10,
+            "cornerRadius": 5
+          }
         },
         "color": {
           "field": "avg_commute_time",
           "type": "quantitative",
-          "scale": {"scheme": "plasma"},
-          "title": "Avg Commute Time (mins)"
+          "scale": {"scheme": "magma"},
+          "title": "Avg Time (mins)",
+          "legend": {
+            "orient": "bottom-right",
+            "fillColor": "rgba(255, 255, 255, 0.85)",
+            "padding": 10,
+            "cornerRadius": 5
+          }
         },
         "order": {
           "field": "avg_commute_time",
@@ -99,7 +92,7 @@
         "tooltip": [
           {"field": "orig_upper", "type": "nominal", "title": "From"},
           {"field": "dest_label", "type": "nominal", "title": "To"},
-          {"field": "traffic_volume", "type": "quantitative", "title": "Total Morning Trips"},
+          {"field": "traffic_volume", "type": "quantitative", "title": "Total Morning Trips", "format": ","},
           {"field": "avg_commute_time", "type": "quantitative", "title": "Average Time (mins)", "format": ".1f"}
         ]
       }

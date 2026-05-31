@@ -1,0 +1,80 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Punchcard Timeline: Transport Mode vs Time of Day",
+  "width": "container",
+  "height": 400,
+  "data": {
+    "url": "data/Chart4_bubble_data.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.starthour != null && datum.starthour >= 0 && datum.starthour <= 24"
+    },
+    {
+      "filter": {
+        "field": "linkmode",
+        "oneOf": ["Vehicle Driver", "Train", "Public Bus", "Walking"]
+      }
+    }
+  ],
+  "mark": {
+    "type": "circle",
+    "opacity": 0.75,
+    "stroke": "#ffffff",
+    "strokeWidth": 1.5,
+    "clip": false 
+  },
+  "encoding": {
+    "x": {
+      "field": "starthour",
+      "type": "quantitative",
+      "title": "Time of Day (24h)",
+      "scale": {
+        "domain": [-1, 25] 
+      },
+      "axis": {
+        "values": [0, 3, 6, 9, 12, 15, 18, 21, 24], 
+        "labelExpr": "datum.value + ':00'",
+        "grid": true,
+        "gridDash": [4, 4] 
+      }
+    },
+    "y": {
+      "field": "linkmode",
+      "type": "nominal",
+      "title": null, 
+      "axis": {
+        "labelFontSize": 13,
+        "labelFontWeight": "bold",
+        "grid": true,
+        "tickSize": 0,
+        "labelPadding": 10
+      }
+    },
+    "size": {
+      "field": "TotalTrips", 
+      "type": "quantitative",
+      "title": "Number of Trips",
+      "scale": {
+        "range": [20, 2500] 
+      },
+      "legend": {
+        "orient": "right"
+      }
+    },
+    "color": {
+      "field": "linkmode",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "domain": ["Vehicle Driver", "Train", "Public Bus", "Walking"],
+        "range": ["#e74c3c", "#3498db", "#f39c12", "#2ecc71"]
+      }
+    },
+    "tooltip": [
+      {"field": "linkmode", "type": "nominal", "title": "Mode"},
+      {"field": "starthour", "type": "quantitative", "title": "Hour of Day", "format": "d"},
+      {"field": "TotalTrips", "type": "quantitative", "title": "Total Trips", "format": ","}
+    ]
+  }
+}

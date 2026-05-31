@@ -11,100 +11,113 @@
 </head>
 <body>
     <div class="page-container">
-        <header>
+        
+        <header class="main-header">
             <h1 class="main-title">The Anatomy of Gridlock</h1>
-            <p class="sub-title">Why Victoria Cannot Ditch the Car</p>
+            <p class="sub-title">A Data-Driven Journey into Melbourne's Commute</p>
+            <div class="intro-text">
+                <p>Melbourne’s traffic congestion is not just a symptom of population growth; it is a complex spatial and temporal puzzle. Using data from the Victorian Integrated Survey of Travel and Activity (VISTA 2012-2020), this visualization explores the deep-seated structural issues that govern how we move. By dissecting the 'when', 'why', and 'how' of urban mobility, we uncover the hidden penalties of suburban sprawl and the unbreakable allure of the private car.</p>
+            </div>
         </header>
 
-        <section class="dashboard-row" id="chapter-1">
-            <h2 class="row-title">Chapter 1: The Status Quo & The Constraints</h2>
-            
-            <div class="row-content">
-                <div class="vis-block">
-                    <div class="vis-text">
-                        <h3>Figure 1: The Dominance of Cars</h3>
-                        <p>While public transport is heavily promoted, the reality is stark...</p>
-                    </div>
-                    <div class="vis-chart" id="chart_1"></div>
-                </div>
+        <div class="chapter-divider">Part 1: The Rhythm of the City</div>
 
-                <div class="vis-block">
-                    <div class="vis-text">
-                        <h3>Figure 2: Car Ownership Concentration</h3>
-                        <p>Living in the outer suburbs means relying on vehicles...</p>
-                    </div>
-                    <div class="vis-chart" id="chart_2"></div>
-                </div>
-
-                <div class="vis-block">
-                    <div class="vis-text">
-                        <h3>这里写图表的小标题 (Figure X)</h3>
-                        <p>这里写一两句洞察 (annotation)</p>
-                    </div>
-                    <div class="vis-chart" id="chart_3"></div>
-                </div>
-
-                <div class="vis-block">
-                    <div class="vis-text">
-                        <h3>Figure 4: The Suburban Shift</h3>
-                        <p>As we move outward from the CBD (Melbourne) to the fringe (Yarra Ranges), sustainable options evaporate, and the reliance on <span class="text-car">Vehicle Drivers</span> completely takes over.</p>
-                    </div>
-                    <div class="vis-chart" id="chart_4"></div>
-                </div>
-
-                <div class="vis-block">
-                    <div class="vis-text">
-                        <h3>Figure 5: The Rhythm of the City</h3>
-                        <p>Removing the "Go Home" trips reveals the true heartbeat of Melbourne. Notice how commuting (Work/Education) creates the morning spike, while discretionary travel like Shopping and Socializing forms a massive plateau throughout the mid-day.</p>
-                    </div>
-                    <div class="vis-chart" id="chart_5"></div>
-                </div>
-
-                <div class="vis-block">
-                    <div class="vis-text">
-                        <h3>Figure 6: The Congestion Matrix</h3>
-                        <p>By mapping the Top 10 most active LGAs across a 24-hour cycle, a clear spatiotemporal pattern emerges. Notice how the deepest red "heat" clusters intensely around the traditional morning and evening commuting hours.</p>
-                    </div>
-                    <div class="vis-chart" id="chart_6"></div>
-                </div>
-
-                <div class="vis-block" style="grid-column: 1 / -1;"> 
-                    <div class="vis-text">
-                        <h3>Figure 7: The Morning Convergence</h3>
-                        <p>During the 7:00 AM - 9:00 AM peak, a massive volume of traffic funnels into the Melbourne CBD. The thickness of the lines represents trip volume, while the color intensity reveals the gruelling average commute times borne by outer suburban residents.</p>
-                    </div>
-                    <div class="vis-chart" id="chart_7"></div>
-                </div>
+        <section class="story-section layout-side-by-side">
+            <div class="vis-text">
+                <h2>1. The Pulse of the City (When does it happen?)</h2>
+                <p>Before understanding why congestion occurs, we must identify when and where it peaks. This spatiotemporal heatmap acts as a distinct "tidal" pattern emerges immediately: massive heat signatures (deep red) flare up simultaneously across major Local Government Areas (LGAs) during the morning (7:00 AM - 9:00 AM) and afternoon (3:00 PM - 6:00 PM) peaks. This synchronization creates intense pressure on the road network, defining the daily "choke points" of Melbourne.</p>
             </div>
-
-            <div class="vis-block">
-                <div class="vis-text">
-                    <h3>Figure 8: The Distance-Time Penalty</h3>
-                    <p>By plotting cumulative distance against trip time across representative LGAs, a clear disparity emerges. Outer suburbs like Yarra Ranges (grouped on the far right) suffer from heavily inflated travel times compared to the dense, short-trip clusters of Melbourne CBD.</p>
-                </div>
-                <div class="vis-chart" id="chart_8"></div>
-            </div>
-
-            <div class="vis-block">
-                <div class="vis-text">
-                    <h3>Figure 9: The Wait-Time Penalty</h3>
-                    <p>Focusing on the critical 10-20km mid-range commute to the CBD during morning peaks, this breakdown reveals why <span class="text-car">Vehicle Driver</span> remains the dominant choice. Public transport users suffer a severe "wait-time penalty" (shown in red), drastically extending their total journey duration before they even begin moving.</p>
-                </div>
-                <div class="vis-chart" id="chart_9"></div>
-            </div>
-
-            <div class="vis-block">
-                <div class="vis-text">
-                    <h3>Figure 10: The High-Mobility Car Trap</h3>
-                    <p>This normalized breakdown reveals a stark reality of urban mobility: as individuals require more trips per day (trip chaining), their reliance on <span class="text-car">Vehicle Drivers</span> completely engulfs alternative modes. Active and public transport are viable for 1-2 simple trips, but fail to support complex daily routines.</p>
-                </div>
-                <div class="vis-chart" id="chart_10"></div>
-            </div>
-
+            <div class="vis-chart" id="chart_6"></div>
         </section>
 
-        </div>
+        <section class="story-section layout-side-by-side">
+            <div class="vis-text">
+                <h2>2. Dissecting the Peak (Why are we traveling?)</h2>
+                <p>What fuels these intense morning and afternoon heat signatures? By breaking down total travel volume by trip purpose (excluding returning home), the anatomy of the peak becomes clear. The sharp morning spike is overwhelmingly driven by obligatory travel—commuting to Work and Education. In contrast, the mid-day period forms a broad, flat plateau sustained by discretionary trips like Shopping and Social/Recreational activities, before the evening commute triggers the second tidal wave.</p>
+            </div>
+            <div class="vis-chart" id="chart_5"></div>
+        </section>
 
+        <section class="story-section layout-stacked-wide">
+            <div class="vis-text centered-text">
+                <h2>3. The Dominance of the Engine (How are we traveling?)</h2>
+                <p>Knowing why people travel, we now examine how they get there. Plotting transportation modes across the 24-hour cycle reveals a stark reality. The massive red bubbles corresponding to <span class="text-car">Vehicle Drivers</span> dominate every single hour and every trip purpose. While <span class="text-walk">walking</span> shows some presence during school drop-offs or short local trips, the private car is unequivocally the backbone of Melbourne’s mobility, casting a long shadow over public and active transport options.</p>
+            </div>
+            <div class="vis-chart" id="chart_4"></div>
+        </section>
+
+        <div class="chapter-divider">Part 2: The Geography of Sprawl</div>
+
+        <section class="story-section layout-side-by-side">
+            <div class="vis-text">
+                <h2>4. The Aggregate Reality</h2>
+                <p>The overwhelming visual presence of <span class="text-car">cars</span> in the previous chart is not an illusion. Looking at the aggregate mode share for the entire state, the data confirms that the vast majority of all trips in Victoria are undertaken by private vehicles. This overwhelming reliance on a single mode of transport forms the baseline condition for Melbourne's systemic congestion issues.</p>
+            </div>
+            <div class="vis-chart" id="chart_1"></div>
+        </section>
+
+        <section class="story-section layout-side-by-side">
+            <div class="vis-text">
+                <h2>5. The Suburban Divide</h2>
+                <p>However, this car dependency is not distributed equally across the city. By arraying representative LGAs from the inner-city to the outer fringes, a severe "Suburban Sprawl Effect" materializes. While residents in the densely populated Melbourne CBD maintain a healthier balance between walking, public transit, and driving, the picture shifts drastically outwards. In outer suburbs like Yarra Ranges and Knox, sustainable transport options evaporate, leaving residents almost entirely dependent on the red block of <span class="text-car">private vehicle usage</span>.</p>
+            </div>
+            <div class="vis-chart" id="chart_3"></div>
+        </section>
+
+        <section class="story-section layout-side-by-side">
+            <div class="vis-text">
+                <h2>6. The Geography of Commuting Distance</h2>
+                <p>Why are outer suburbs so car-dependent? This spatial map provides the context: average commuting distances. The map clearly illustrates that residents on the urban fringe face significantly longer average journeys compared to inner-city dwellers. When destinations are spread far apart across low-density suburbs, the feasibility of walking or cycling plummets, forcing residents behind the wheel.</p>
+            </div>
+            <div class="vis-chart" id="chart_2"></div>
+        </section>
+
+        <div class="chapter-divider">Part 3: The Commuter's Penalty</div>
+
+        <section class="story-section layout-stacked-wide">
+            <div class="vis-text centered-text">
+                <h2>7. The Morning Convergence (The O-D Flow)</h2>
+                <p>The spatial inequality reaches its climax during the morning peak. This flow map illustrates the immense volume of traffic being funneled from the sprawling suburbs directly into the economic heart of the city (CBD). The thickness of the lines represents sheer volume, while the intense purple hues reveal the grueling, inflated average commute times borne by residents traveling from outer LGAs. The further out you live, the heavier the "time penalty" you pay.</p>
+            </div>
+            <div class="vis-chart map-tall" id="chart_7"></div>
+        </section>
+
+        <section class="story-section layout-stacked-wide">
+            <div class="vis-text centered-text">
+                <h2>8. The Inner-City Paradox</h2>
+                <p>Given the long distances traveled by suburbanites, one might assume inner-city (Melbourne CBD) trips are universally short and quick. However, the data reveals a counter-intuitive paradox. While the density of CBD trips is concentrated in the short-distance/short-time (bottom-left) corner, the overall scatter of CBD trips is surprisingly wide. Outer LGAs have steep, predictable trendlines (longer distance = longer time). But in the CBD, the scatter plot is chaotic, with many short-distance trips suffering unpredictable, inflated travel times. Why is inner-city mobility so erratic?</p>
+            </div>
+            <div class="vis-chart" id="chart_8"></div>
+        </section>
+
+        <section class="story-section layout-side-by-side">
+            <div class="vis-text">
+                <h2>9. The Wait-Time Penalty</h2>
+                <p>The key to resolving the urban center paradox lies in the operational mechanisms of public transportation—the primary alternative to driving in densely populated areas. An analysis of medium-distance commutes (10–20 kilometers) reveals a critical flaw in public transportation systems: the “waiting time penalty.” Public transit users (<span class="text-train">trains</span>/<span class="text-bus">buses</span>) are forced to endure significant amounts of unnecessary waiting time (the red sections in the figure), while <span class="text-car">private car</span> drivers can easily avoid this step. At the same time, the uncertainty of travel times and waiting times in public transit still reduces the overall reliability of the journey, which explains why the distribution of travel times in the Central Business District (CBD) is so chaotic. The advantage of private cars lies in their ability to depart immediately.</p>
+            </div>
+            <div class="vis-chart" id="chart_9"></div>
+        </section>
+
+        <section class="story-section layout-side-by-side">
+            <div class="vis-text">
+                <h2>10. The High-Mobility Trap (Trip Chaining)</h2>
+                <p>Furthermore, especially for people with busy daily schedules, the convenience of <span class="text-car">cars</span> explains why they remain the dominant mode of transportation. This chart illustrates the concept of “trip chaining.” As people’s daily itineraries grow increasingly complex—requiring three to four, or even five or more stops per day (such as dropping children off at school, commuting to work, and shopping for groceries)—their reliance on driving has completely overshadowed other modes of transportation. Public transportation is suitable for simple point-to-point commutes, but it is completely unable to meet the practical needs of modern urban life, which involves multiple stops. The car is not merely a mode of transportation; it is a necessity for fulfilling complex travel needs.</p>
+            </div>
+            <div class="vis-chart" id="chart_10"></div>
+        </section>
+        
+        <footer class="main-footer">
+            <div class="metadata-section">
+                <h4>Project Metadata</h4>
+                <p><strong>Author:</strong> Sihan He StudentID:36198064</p>
+                <p><strong>Date:</strong> 29 May 2026</p>
+                <p><strong>Data Source:</strong> Victorian Integrated Survey of Travel and Activity (VISTA 2012-2020), Department of Transport and Planning, Victoria.</p>
+                <p><strong>Map Source:</strong> Victorian Local Government Areas (LGA) Boundaries.</p>
+                <p><strong>AI Acknowledgment:</strong>Google Gemini was used to assist with refining narrative grammar, text structuring, and optimizing Vega-Lite JSON code layouts.</p>
+            </div>
+        </footer>
+    </div>
+    
     <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,3 +1,6 @@
+/* =========================================================
+   Reset & Base Typography
+   ========================================================= */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,106 +8,162 @@
 }
 
 body {
-    /* 无衬线字体提高可读性 */
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f4f6f8; /* 浅灰背景凸显白色卡片*/
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #ffffff; /* 纯白背景，顶级新闻媒体标配 */
     color: #333333;
-    line-height: 1.6;
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
 }
 
 .page-container {
-    max-width: 1200px; /* 限制最大宽度 */
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 3rem 2rem;
 }
 
 /* =========================================================
-   Header
+   Header & Text Styles
    ========================================================= */
-header {
+.main-header {
     text-align: center;
-    margin-bottom: 4rem;
-    padding-bottom: 2rem;
-    border-bottom: 2px solid #e2e8f0;
+    max-width: 800px;
+    margin: 0 auto 5rem auto;
 }
 
 .main-title {
-    font-size: 2.8rem;
-    color: #1a202c;
-    margin-bottom: 0.5rem;
+    font-size: 3.5rem;
     font-weight: 800;
+    color: #111111;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
 }
 
 .sub-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #666666;
+    margin-bottom: 2rem;
+}
+
+.intro-text {
+    font-size: 1.1rem;
+    color: #444444;
+    text-align: left;
+    border-left: 4px solid #e74c3c;
+    padding-left: 1.5rem;
+}
+
+.chapter-divider {
     font-size: 1.2rem;
-    color: #718096;
-    font-weight: 400;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999999;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 1rem;
+    margin: 4rem 0 2rem 0;
 }
 
-/* =========================================================
-   Grid Layout
-   ========================================================= */
-.dashboard-row {
-    margin-bottom: 5rem; /* 章节之间留白 */
-}
-
-.row-title {
+.vis-text h2 {
     font-size: 1.8rem;
-    color: #2d3748;
-    margin-bottom: 2rem;
-    padding-left: 1rem;
-    border-left: 5px solid #e74c3c; /* 强调标题 */
-}
-
-/* CSS Grid：大屏双列小屏单列 */
-.row-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    gap: 2.5rem; /* 卡片之间 */
-}
-
-/* =========================================================
-   The Card Component
-   ========================================================= */
-.vis-block {
-    background-color: #ffffff;
-    border-radius: 12px; /* 圆角*/
-    padding: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.025); /* 阴影 */
-}
-
-.vis-text {
-    margin-bottom: 2rem;
-}
-
-.vis-text h3 {
-    font-size: 1.3rem;
-    color: #2d3748;
-    margin-bottom: 0.8rem;
+    color: #222222;
+    margin-bottom: 1rem;
+    line-height: 1.3;
 }
 
 .vis-text p {
-    font-size: 0.95rem;
-    color: #4a5568;
+    color: #555555;
+    font-size: 1.05rem;
+}
+
+.centered-text {
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+    text-align: center;
 }
 
 /* =========================================================
-   Chart Container Fix
+   Invisible Grid Layouts
+   ========================================================= */
+.story-section {
+    margin-bottom: 6rem; /* 赋予各个图表充足的呼吸空间 */
+}
+
+/* 1. 左右对齐网格 */
+.layout-side-by-side {
+    display: grid;
+    /* 文字38%图表62% */
+    grid-template-columns: 3.5fr 6.5fr; 
+    gap: 4rem;
+    align-items: center;
+}
+
+/* 2. 上下堆叠（适用于需要宽度的图表，如矩阵、散点小多图） */
+.layout-stacked-wide {
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================================
+   Chart Containers
    ========================================================= */
 .vis-chart {
     width: 100%;
-    min-height: 400px; /* 强制撑开高度*/
-    /* 确保图表在卡片里居中 */
+    /* 容器设为 Flex，保证响应式拉伸 */
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+}
+
+/* 修正选择器：当两个 class 在同一个 div 上时，中间没有空格 */
+.vis-chart.vega-embed {
     display: flex;
     justify-content: center;
-    align-items: center; 
+    width: 100%;
+}
+
+/* 终极杀招：无视 Vega-Lite 生成的各种多余隐藏标签，强行居中主画布 */
+.vis-chart canvas.marks {
+    margin: 0 auto !important;
+    display: block !important;
+}
+
+.map-tall {
+    min-height: 600px; 
 }
 
 /* =========================================================
-   Colored Text Utility Classes
+   Responsive Design (满足小屏不横向滚动)
    ========================================================= */
-/* 根据Rubric在index.html的<p>里用这些class */
+@media (max-width: 900px) {
+    .layout-side-by-side, .layout-side-by-side.reverse {
+        grid-template-columns: 1fr; /* 小屏幕自动折叠为单列 */
+        gap: 2rem;
+    }
+    
+    .layout-side-by-side.reverse .vis-text {
+        order: -1; /* 小屏幕上始终让文字在图表上方 */
+    }
+    
+    .main-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* =========================================================
+   Utilities & Footer
+   ========================================================= */
 .text-car { color: #e74c3c; font-weight: 700; }
 .text-train { color: #3498db; font-weight: 700; }
 .text-bus { color: #f39c12; font-weight: 700; }
 .text-walk { color: #2ecc71; font-weight: 700; }
+
+.main-footer {
+    margin-top: 6rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eeeeee;
+    text-align: center;
+    color: #888888;
+    font-size: 0.9rem;
+}
